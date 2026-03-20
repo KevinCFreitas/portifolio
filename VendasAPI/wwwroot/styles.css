@@ -1,6 +1,7 @@
 :root {
   --bg: #07111f;
   --panel: rgba(10, 19, 37, 0.72);
+  --panel-strong: rgba(10, 19, 37, 0.9);
   --panel-border: rgba(255, 255, 255, 0.08);
   --text: #eff6ff;
   --muted: #a9b7d0;
@@ -30,7 +31,7 @@ body {
 }
 
 .container {
-  width: min(1120px, calc(100% - 2rem));
+  width: min(1160px, calc(100% - 2rem));
   margin: 0 auto;
 }
 
@@ -66,7 +67,7 @@ body {
 .hero-card,
 .project-card,
 .contact-card,
-.about {
+.stack-card {
   backdrop-filter: blur(18px);
   background: var(--panel);
   border: 1px solid var(--panel-border);
@@ -94,13 +95,15 @@ body {
   font-weight: 600;
 }
 
-.cta-small {
+.nav-link:hover,
+.project-links a:hover,
+.contact-mini a:hover {
   color: var(--text);
 }
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 28px;
   align-items: center;
   padding: 72px 0 32px;
@@ -122,29 +125,38 @@ body {
 
 .hero-copy h1,
 .section-title h2,
-.about h2,
 .contact-card h2 {
-  margin: 18px 0 16px;
+  margin: 18px 0 12px;
   line-height: 1.05;
 }
 
 .hero-copy h1 {
-  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+}
+
+.hero-copy h2 {
+  margin: 0 0 18px;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  color: var(--secondary);
 }
 
 .hero-copy p,
 .project-card p,
-.about p,
-.contact-card p {
+.stack-card li,
+.contact-card p,
+.contact-mini a,
+.link-placeholder {
   color: var(--muted);
   line-height: 1.7;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
 }
 
-.hero-actions {
+.hero-actions,
+.contact-actions {
   display: flex;
   gap: 14px;
   margin: 28px 0;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -224,12 +236,22 @@ body {
 
 .metric-grid strong {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 8px;
 }
 
-.metric-grid span {
-  color: var(--muted);
+.contact-mini {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.contact-mini a,
+.project-links a {
+  color: #dbeafe;
+  text-decoration: none;
 }
 
 .section {
@@ -245,14 +267,22 @@ body {
   font-weight: 700;
 }
 
-.project-grid {
+.project-grid,
+.stack-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
+.project-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.stack-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .project-card,
-.about,
+.stack-card,
 .contact-card {
   border-radius: 24px;
   padding: 24px;
@@ -262,27 +292,46 @@ body {
   background: linear-gradient(135deg, rgba(124, 58, 237, 0.28), rgba(15, 23, 42, 0.85));
 }
 
-.project-card h3 {
+.accent-card {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(15, 23, 42, 0.88));
+}
+
+.project-card h3,
+.stack-card h3 {
   font-size: 1.35rem;
   margin: 16px 0 10px;
 }
 
-.about,
-.contact-card {
-  display: grid;
-  gap: 8px;
+.project-links {
+  margin-top: 18px;
+}
+
+.link-placeholder {
+  display: inline-block;
+}
+
+.stack-card {
+  background: var(--panel-strong);
+}
+
+.stack-card ul {
+  margin: 0;
+  padding-left: 18px;
 }
 
 .contact-card {
+  display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
+  gap: 20px;
   margin-bottom: 56px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   .hero-content,
-  .project-grid,
-  .contact-card {
+  .stack-grid,
+  .contact-card,
+  .project-grid {
     grid-template-columns: 1fr;
   }
 
@@ -304,10 +353,11 @@ body {
   }
 
   .hero-copy h1 {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
 
-  .hero-actions {
+  .hero-actions,
+  .contact-actions {
     flex-direction: column;
   }
 
